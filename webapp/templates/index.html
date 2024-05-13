@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            width: 33%;
+        }
+        img {
+            width: 100px; /* Adjust based on your preference */
+            height: 100px; /* Adjust based on your preference */
+        }
+    </style>
+</head>
+<body>
+    <h1>App Icons</h1>
+    <table>
+        <tr>
+            {% for app in apps %}
+                <td><img src="{{ app.icon }}" alt="App Icon"></td>
+                {% if loop.index % 3 == 0 and not loop.last %}
+                    </tr><tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>
+
