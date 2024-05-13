@@ -12,19 +12,36 @@
             padding: 10px;
             text-align: center;
             width: 33%;
+            cursor: pointer; /* Makes the table cells clickable */
         }
         img {
             width: 100px; /* Adjust based on your preference */
             height: 100px; /* Adjust based on your preference */
         }
     </style>
+    <script>
+        function launchApp(appName) {
+            fetch('/launch_app', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `name=${encodeURIComponent(appName)}`
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 <body>
     <h1>App Icons</h1>
     <table>
         <tr>
             {% for app in apps %}
-                <td><img src="{{ app.icon }}" alt="App Icon"></td>
+                <td onclick="launchApp('{{ app.name }}')">
+                    <img src="{{ app.icon }}" alt="App Icon">
+                </td>
                 {% if loop.index % 3 == 0 and not loop.last %}
                     </tr><tr>
                 {% endif %}
